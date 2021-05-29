@@ -23,8 +23,8 @@ class HomePageFragment : Fragment() {
 
     private lateinit var layout: FragmentHomePageBinding
     private lateinit var adapter: FoodAdapter
-    private lateinit var foodList : ArrayList<Foods>
-    private lateinit var fdaoi : FoodsDao
+    private lateinit var foodList: ArrayList<Foods>
+    private lateinit var fdaoi: FoodsDao
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,23 +35,21 @@ class HomePageFragment : Fragment() {
         fdaoi = ApiUtils.getFoodDao()
 
         layout.rv.layoutManager = LinearLayoutManager(requireContext())
-        foodList = ArrayList()
-        val f1 = Foods(1,"resim adi","yemek adi",50)
-        val f2 = Foods(1,"resim adi","yemek adi",50)
-        val f3 = Foods(1,"resim adi","yemek adi",5065)
-        foodList.add(f1)
-        foodList.add(f2)
-        foodList.add(f3)
+
         foodShow()
 
-        adapter = FoodAdapter(requireContext(), foodList)
-        layout.rv.adapter = adapter
         return layout.root
     }
-    fun foodShow(){
+
+    fun foodShow() {
         fdaoi.AllFoods().enqueue(object : Callback<FoodsAns> {
             override fun onResponse(call: Call<FoodsAns>, response: Response<FoodsAns>) {
-                TODO("Not yet implemented")
+                val foodList = response.body()!!.foods
+
+                for (f in foodList) {
+                    Log.e("***************", "*************")
+                    Log.e("yemek adi", f.yemek_adi.toString())
+                }
             }
 
             override fun onFailure(call: Call<FoodsAns>, t: Throwable) {
@@ -63,5 +61,6 @@ class HomePageFragment : Fragment() {
 
 
 }
+
 
 

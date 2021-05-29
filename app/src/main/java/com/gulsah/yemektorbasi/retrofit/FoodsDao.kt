@@ -9,7 +9,7 @@ import retrofit2.http.POST
 
 interface FoodsDao {
     @GET("yemekler/tum_yemekler.php")
-    fun AllFoods(): retrofit2.Call<Foods>
+    fun AllFoods(): retrofit2.Call<FoodsAns>
 
     @POST("yemekler/tum_yemekler_arama.php")
     @FormUrlEncoded

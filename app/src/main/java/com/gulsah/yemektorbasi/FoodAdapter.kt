@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gulsah.yemektorbasi.databinding.CardViewBinding
+import com.gulsah.yemektorbasi.entity.Foods
 
 
 class FoodAdapter(var mContext: Context, var foodList: List<Foods>) :
@@ -22,15 +23,14 @@ class FoodAdapter(var mContext: Context, var foodList: List<Foods>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardHolder {
         val layoutInflater = LayoutInflater.from(mContext)
-        val layout = CardViewBinding.inflate(layoutInflater,parent,false)
+        val layout = CardViewBinding.inflate(layoutInflater, parent, false)
         return CardHolder(layout)
     }
 
     override fun onBindViewHolder(holder: CardHolder, position: Int) {
         val food = foodList.get(position)
+        holder.cardView.foodObject = food
 
-        holder.cardView.textViewFoodName.text = "${food.yemek_adi}"
-        holder.cardView.textViewPrice.text = "${food.yemek_fiyat}"
     }
 
     override fun getItemCount(): Int {

@@ -9,12 +9,12 @@ data class Foods(
     var id: Int,
     @SerializedName("yemek_resim_adi")
     @Expose
-    var pic_name: String,
+    var yemek_resim_adi: String,
     @SerializedName("yemek_adi")
     @Expose
-    var name: String,
+    var yemek_adi: String,
     @SerializedName("yemek_fiyat")
     @Expose
-    var price: Int,
+    var yemek_fiyat: Int,
 ) {
 }
