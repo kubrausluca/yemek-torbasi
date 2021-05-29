@@ -1,7 +1,6 @@
 package com.gulsah.yemektorbasi.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,16 +9,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gulsah.yemektorbasi.FoodAdapter
-import com.gulsah.yemektorbasi.Foods
 import com.gulsah.yemektorbasi.HomePageViewModel.HomePageViewModel
 import com.gulsah.yemektorbasi.R
 import com.gulsah.yemektorbasi.databinding.FragmentHomePageBinding
-import com.gulsah.yemektorbasi.entity.FoodsAns
 import com.gulsah.yemektorbasi.retrofit.ApiUtils
 import com.gulsah.yemektorbasi.retrofit.FoodsDao
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class HomePageFragment : Fragment() {
 
@@ -38,6 +32,7 @@ class HomePageFragment : Fragment() {
         fdaoi = ApiUtils.getFoodDao()
         layout.homePageFragment = this
         layout.rv.layoutManager = LinearLayoutManager(requireContext())
+
         viewModel.foodsList.observe(viewLifecycleOwner) {
             adapter = FoodAdapter(requireContext(), it)
             layout.adapter = adapter

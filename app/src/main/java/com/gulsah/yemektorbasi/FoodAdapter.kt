@@ -3,9 +3,12 @@ package com.gulsah.yemektorbasi
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.gulsah.yemektorbasi.databinding.CardViewBinding
 import com.gulsah.yemektorbasi.entity.Foods
+import com.gulsah.yemektorbasi.fragment.HomePageFragment
+import com.gulsah.yemektorbasi.fragment.HomePageFragmentDirections
 import com.squareup.picasso.Picasso
 
 
@@ -32,6 +35,11 @@ class FoodAdapter(var mContext: Context, var foodList: List<Foods>) :
         Picasso.get().load("http://kasimadalan.pe.hu/yemekler/resimler/${food.yemek_resim_adi}")
             .into(holder.cardView.imageViewYemekResim)
         holder.cardView.foodObject = food
+
+        holder.cardView.cardViewList.setOnClickListener {
+            val transition = HomePageFragmentDirections.transition(food)
+            Navigation.findNavController(it).navigate(transition)
+        }
 
     }
 

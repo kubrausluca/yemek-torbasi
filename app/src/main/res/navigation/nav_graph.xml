@@ -9,5 +9,18 @@
         android:id="@+id/homePageFragment"
         android:name="com.gulsah.yemektorbasi.fragment.HomePageFragment"
         android:label="HomePageFragment"
-        tools:layout="@layout/fragment_home_page"/>
+        tools:layout="@layout/fragment_home_page">
+        <action
+            android:id="@+id/transition"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.gulsah.yemektorbasi.fragment.DetailsFragment"
+        android:label="DetailsFragment"
+        tools:layout="@layout/fragment_details">
+        <argument
+            android:name="foodObject"
+            app:argType="com.gulsah.yemektorbasi.entity.Foods" />
+    </fragment>
 </navigation>

@@ -2,6 +2,7 @@ package com.gulsah.yemektorbasi.entity
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Foods(
     @SerializedName("yemek_id")
@@ -16,5 +17,5 @@ data class Foods(
     @SerializedName("yemek_fiyat")
     @Expose
     var yemek_fiyat: Int,
-) {
+) : Serializable {
 }
