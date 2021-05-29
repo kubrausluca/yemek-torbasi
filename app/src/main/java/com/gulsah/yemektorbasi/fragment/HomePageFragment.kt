@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gulsah.yemektorbasi.FoodAdapter
 import com.gulsah.yemektorbasi.Foods
+import com.gulsah.yemektorbasi.HomePageViewModel.HomePageViewModel
 import com.gulsah.yemektorbasi.R
 import com.gulsah.yemektorbasi.databinding.FragmentHomePageBinding
 import com.gulsah.yemektorbasi.entity.FoodsAns
@@ -21,10 +23,11 @@ import retrofit2.Response
 
 class HomePageFragment : Fragment() {
 
-    private lateinit var layout: FragmentHomePageBinding
-    private lateinit var adapter: FoodAdapter
-    private lateinit var foodList: ArrayList<Foods>
+    //private lateinit var layout: FragmentHomePageBinding
     private lateinit var fdaoi: FoodsDao
+    private lateinit var layout: FragmentHomePageBinding
+    private lateinit var viewModel: HomePageViewModel
+    private lateinit var adapter: FoodAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,30 +36,21 @@ class HomePageFragment : Fragment() {
         // Inflate the layout for this fragment
         layout = DataBindingUtil.inflate(inflater, R.layout.fragment_home_page, container, false)
         fdaoi = ApiUtils.getFoodDao()
-
+        layout.homePageFragment = this
         layout.rv.layoutManager = LinearLayoutManager(requireContext())
+        viewModel.foodsList.observe(viewLifecycleOwner) {
+            adapter = FoodAdapter(requireContext(), it)
+            layout.adapter = adapter
+        }
 
-        foodShow()
 
         return layout.root
     }
 
-    fun foodShow() {
-        fdaoi.AllFoods().enqueue(object : Callback<FoodsAns> {
-            override fun onResponse(call: Call<FoodsAns>, response: Response<FoodsAns>) {
-                val foodList = response.body()!!.foods
-
-                for (f in foodList) {
-                    Log.e("***************", "*************")
-                    Log.e("yemek adi", f.yemek_adi.toString())
-                }
-            }
-
-            override fun onFailure(call: Call<FoodsAns>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-
-        })
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val temp: HomePageViewModel by viewModels()
+        viewModel = temp
     }
 
 

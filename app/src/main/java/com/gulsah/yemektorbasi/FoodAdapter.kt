@@ -2,11 +2,11 @@ package com.gulsah.yemektorbasi
 
 import android.content.Context
 import android.view.LayoutInflater
-
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gulsah.yemektorbasi.databinding.CardViewBinding
 import com.gulsah.yemektorbasi.entity.Foods
+import com.squareup.picasso.Picasso
 
 
 class FoodAdapter(var mContext: Context, var foodList: List<Foods>) :
@@ -29,6 +29,8 @@ class FoodAdapter(var mContext: Context, var foodList: List<Foods>) :
 
     override fun onBindViewHolder(holder: CardHolder, position: Int) {
         val food = foodList.get(position)
+        Picasso.get().load("http://kasimadalan.pe.hu/yemekler/resimler/${food.yemek_resim_adi}")
+            .into(holder.cardView.imageViewYemekResim)
         holder.cardView.foodObject = food
 
     }
